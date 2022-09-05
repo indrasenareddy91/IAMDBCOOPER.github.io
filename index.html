@@ -1,0 +1,830 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Type Ahead 👀</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"
+    />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      .swipe{
+  position: absolute !important;
+  font-size: 22px;
+  font-family:'Staatliches', cursive;
+  font-weight: 900;
+  font-style: bold;
+  letter-spacing: 1.5px;
+  z-index: 5000;
+  bottom: 10%;
+  
+}
+
+
+      .swiper {
+        width: 100%;
+        height: 75%;
+        margin-bottom: 5px;
+      }
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .shade {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+      }
+      .swiper {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .swiper-pagination-bullet-active {
+        background-color: #000 !important;
+    }
+     .swiper-pagination-bullet {
+     background-color:white !important;
+}
+.swiper-pagination{
+  position:absolute !important;
+  bottom: 2% !important;
+  z-index: 2000;
+}
+.size{
+  font-size: 30px !important;
+}
+
+
+    </style>
+ <style>
+   @import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+   html{
+        scroll-behavior: smooth;
+        background-color:black;
+        color:white;
+    }
+   
+    *{
+      padding: 0;
+      margin: 0;
+    }
+    body{
+        box-sizing: border-box; 
+    }
+    .after{
+      color:white;
+      font-size: 30px;
+    }
+    
+    .title{
+      display: flex;
+      justify-content: space-between;
+      padding-left: 2px ;
+      padding-right: 2px;
+      font-size: 10px;
+      margin-top: 8px;
+    }
+  .img{
+    width: 180px;
+    height: 260px;
+    border-radius: 6px;
+  }
+   body::-webkit-scrollbar{
+    display:none;
+    -webkit-overflow-scrolling: touch;
+  }
+  #layout{
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    overflow-y:scroll;
+    flex: 1 1 100%;
+    text-align: left;
+    font-size: 20px;
+    margin-top: 0px;
+    padding-left:40px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color:rgba(255,255,255,0.5);
+    width:auto;
+    
+  }
+  #layout::-webkit-scrollbar{
+    display:none;
+    -webkit-overflow-scrolling: touch;
+  }
+ .preLoad{
+      display: flex;
+      justify-content: center;
+      height: 100vh;
+      align-items: center;
+      flex-direction: column;
+      margin: auto;
+      font-family: 'Rampart One', cursive;
+      font-size: 80px;
+     font-weight: 600;
+ }
+     .one{
+      color:white;
+    }
+    .two{
+      color:aqua; 
+    }
+    .three{
+      color: #f00;
+      padding-left: 30px;
+      }
+ .Section{
+    font-family: Roboto,Noto Naskh Arabic UI,Arial,sans-serif;
+    padding: 20px;
+    padding-left: 5px;
+    padding-bottom: 12px;
+    font-size: 24px;
+    color:white;
+ }
+ .iinfo{
+  display: none;
+  position: relative;
+  width: 100%;
+  z-index: 10000;
+  
+ }
+ .imga{
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+ }
+ .abso{
+  position: absolute;
+  margin-left: 5px;
+ }
+ 
+ .i{
+  position:absolute;
+  margin-top: 280px;
+  font-size: 50px;
+  color:white;
+  font-weight:1000;
+  letter-spacing: 3.5px;
+  font-family: 'Staatliches', cursive;
+  z-index: 2000;
+  margin-left: 10px;
+  width: 96%;
+ }
+ .fading::before{
+  content: '';
+  width: 100% ;
+  height: 30px;
+  position: absolute;
+  bottom: 0%;
+  background:linear-gradient(to bottom,transparent,black);
+  z-index: 100;
+ }
+ 
+ .back_btn{
+
+color: white;
+padding:8px 12px 8px 12px;
+font-style: bold;
+font-weight: 900;
+font-size: 19px;
+ z-index: 5000;
+margin-top: -3px;
+top: 0;
+right: -0.395px;
+background: transparent;
+ }
+ 
+button{
+  border: none;
+  padding-right: -2px;
+  
+}
+ .year{
+
+  font-size: 25px;
+  margin-left: 5px;
+  margin-top: 4px;
+  color:rgba(255,255,255,0.5);
+ }
+#tag{
+  font-size: 18px;
+  margin-top: 10px;
+}
+.genre{
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.back_icon{
+   display: inline;
+   color: white;
+}
+
+.qoute{
+  color:white !important;
+}
+.theme{
+      color:rgba(255, 255, 255, 0.8);
+      font-size: 15px;
+      font-style: bold;
+      text-transform: uppercase;
+       font-weight: 700;
+      letter-spacing: 1px;
+    }
+ @media (min-width: 320px) and (max-width: 768px) {
+  .img{
+       width:120px;
+       height:180px;
+  }
+  html{
+    background-color:#000;
+  }
+  #layout{
+   gap:8px;
+   text-align:left;
+   margin-bottom: -10px;
+   padding-left: 7px;
+
+    }
+  .title{
+   font-size:0.6rem;
+    min-width:29px;
+  }
+  .l{
+  font-size:30px;
+  text-align:center;
+  color:white;
+  }
+  .preLoad{
+    margin-top: -60px;
+  }
+  .imga{
+    width: 100%;
+    height: 330px;
+    object-fit: cover;
+
+  }
+ 
+  #nav_back{
+      top:0;
+      left: 0;
+      position:absolute;
+      z-index: 2000;
+  }
+  .play_btn{
+      background:white;
+      width: 100%;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      font-size: 20px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+      border-radius: 4px;
+      color: black;
+  }
+  .play_text{
+    text-align: center;
+    color: black;
+  }
+  .adult{
+        margin-top: 11px;
+        margin-left: 10px;
+        font-size: 23.5px;
+        font-weight: 900;
+        letter-spacing: 2.5px;
+        font-family:'Staatliches', cursive;
+        color: #DC143C;
+  }
+  .youtube{
+         width: 100%;
+  }
+  .go_back_btn{
+    color:white !important;
+    margin-left: 59px !important;
+       border-radius: 4px;
+      padding-left: 6px;
+      padding-right: 6px;
+      background:rgba(255, 255, 255, 0.16)
+  }
+  .adult_rate{
+    width: 30px;
+    background-color: #DC143C;
+    color: white;
+    text-align: center;
+    font-weight: 900;
+    font-size: 22.5px;
+    padding-left: 5px;
+    border-radius: 5px;
+    
+  }
+  nav{
+  width: 100%;
+  padding-top: 8px;
+  font-size: 20px;
+  height: 50px;
+}
+ul{
+  display: flex;
+  justify-content: space-between;
+  
+  list-style-type: none;
+  font-family:'Staatliches', cursive;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+li{
+  color: white;
+  font-variant-alternates:styleset(ss02);
+}
+.logo{
+font-size: 20px;
+letter-spacing: 1.7px;
+font-style: bold;
+font-weight: 900;
+color: rgba(255, 255, 255, 0.8);
+}
+.search{
+margin-top: 5px !important;
+}
+.search_bar{
+  display: none;
+  
+}
+.search_icon{
+  border: 0;
+  background:transparent;
+  margin-top: -1px;
+}
+.titlehide{
+  display: none !important;
+}
+
+  
+.search_space{
+  width: 90%;
+  margin-top: 8px;
+
+  
+  
+}
+.Section{
+  padding-left: 7px;
+}
+.input_display{
+  display: block !important;
+  color: white;
+  border: 0;
+   background:rgba(255, 255, 255, 0.16);
+  width: 95%;
+  height: 30px;
+  outline: white;
+  border-radius: 2px;
+}
+input{
+  padding: 10px;
+}
+
+
+.must{
+ margin-top: 5px;
+ margin-bottom: 10px;
+  font-size: 28px;
+  font-family:'Staatliches', cursive;
+
+}
+.swiper {
+        width: 100%;
+        height: 220px;        
+        margin-bottom: 5px;
+      }
+      .shade {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+      }
+      .m-item::before{
+  content: '';
+  width: 100% ;
+  height: 335px;
+  position: absolute;
+  background:linear-gradient(to bottom,transparent,black);
+  z-index: 100;
+ }
+.play_btn_abs{
+  width: 19px;
+  height: 1px;
+}
+  
+}
+</style>
+</head>
+<body>
+<div class="preLoad">
+<div class="one" style="visibility: hidden;">Lights</div>
+<div class="two" style="visibility: hidden">Camera</div>
+<div class="three" style="visibility: hidden;">Action.</div>
+</div>
+ <div class="land">
+  <div class="container   loading">
+    <nav>
+      <ul>
+        <li class="logo">TimePass</li>
+        <li class="search_space">
+          <input  class="search_bar" type="search" name="search" id="data_search" placeholder="Search for movies.." autocomplete="off">
+        </li>
+        <li class="search">
+          <span style="height: 50PX;">
+            <button class="search_icon"><img style="width: 30px;color: white;"src="https://img.icons8.com/pastel-glyph/64/FFFFFF/search--v1.png"/></button>
+          </span>
+        </li>
+      </ul>
+    </nav>
+    <h3 align="center" class="must">MUST WATCH</h3>
+    <div class="swiper mySwiper fading">
+      <div class="swiper-wrapper shit">
+        <div class="swiper-slide"  style="width: 326px; margin-right: 5px;">
+          <div class="swipe" style="z-index:20px;background:linear-gradient(to bottom,transparent,transparent);"><img style="width:200px;" src="https://image.tmdb.org/t/p/original/kpuNKsIzVbK3LDVo4iOJDAY0y7d.png"></div>
+    <img class="shade clicking_here" data-name="tt0110912" data-year="1994" data-genre="Crime, Drama" data-run="154 minS" data-dir="Quentin Tarantino" data-rated="R" data-awards="Won 1 Oscar. 70 wins &amp; 75 nominations total" data-votes="2,003,910" src="https://image.tmdb.org/t/p/original/y02e2ePexSkgnymdsRmf4s4rSBE.jpg"></div>
+      </div>
+      
+      <div class="swiper-pagination"></div>
+    </div>
+  
+
+     <span><p class="Section theme">Top Thriller Movies&nbsp&nbsp<i  style="font-size:15px;"class="fa fa-chevron-right"></i></p></span>
+     <div class="info" id="layout"></div>
+     <span><p class="Section theme">Top Comedy Movies&nbsp&nbsp<i style="font-size:15px;" class="fa fa-chevron-right"></i></p></span>
+     <div class="comedy" id="layout"></div>
+  </div>
+<div class="iinfo" id="info_layout">
+  <div class=" adult adult_hide"  id="nav_back">   </div>
+  <div class="back_btn abso btn_hide">
+  
+  <button class="back_btn" data-name=${data.id}>BACK</button>
+  </div>
+ <div class="movieInfoData">
+ </div>
+  </div>
+</div>
+<script>
+  var mustwatch = ["tt0137523","tt0068646","tt0114814","tt0111161","tt0108052","tt0364569","tt5311514","tt0167404"];
+ async function must(){ 
+  const API_KEY = `680db35a08bf7184a8a2c16cd0d7308e`;
+  
+  const alldata =  mustwatch.forEach( async m => {
+    const swiper_wrapper  = document.querySelector('.shit');
+    const end = `https://api.themoviedb.org/3/movie/${m}?api_key=${API_KEY}&language=en-US&append_to_response=images&include_image_language=en,null`;
+   const omdb_end =  `http://www.omdbapi.com?i=${m}&apikey=de727baf`;
+
+    const data_main = await fetch(end).then(data => data.json()).then(data => data);
+    const data = await fetch(omdb_end).then(data => data.json()).then(data => data);
+     try {
+      var photo_link  = data_main.images.backdrops[9].file_path;
+      var photo = await `https://image.tmdb.org/t/p/original${photo_link}`;
+
+    }
+    catch(e){
+       try {
+        var photo_link  = data_main.images.backdrops[0].file_path;
+        
+        var photo = await `https://image.tmdb.org/t/p/original${photo_link}`;
+      
+       } 
+       catch(e){
+        try {
+          var photo_link  = data_main.images.backdrops[2].file_path;
+          var photo = await `https://image.tmdb.org/t/p/original${photo_link}`;
+
+       }
+       catch(e){
+        try {
+          var photo_link  = data_main.images.backdrops[0].file_path;
+          var  photo = await `https://image.tmdb.org/t/p/original${photo_link}`;
+
+        }
+        catch(e){
+         
+          var  photo = await `https://image.tmdb.org/t/p/original${data_main.poster_path}`;
+          
+        }
+       }
+    }
+    }
+    try{
+            const logo_movie_name = data_main.images.logos[0].file_path;
+            var logo_pic  = `https://image.tmdb.org/t/p/original${logo_movie_name}`;
+            var logo  = await `<img class="logo_click" data-name="${data.imdbID}" data-year="${data.Year}" data-genre="${data.Genre}" data-run="${data.Runtime}S" data-dir="${data.Director}" data-rated="${data.Rated}" data-awards="${data.Awards}"  data-votes="${data.imdbVotes}" style="width:200px;" src=${logo_pic}>`
+              }
+              catch(e){
+                try{
+                  const logo_movie_name = data_main.images.logos[0].file_path;
+                  var logo_pic  = `https://image.tmdb.org/t/p/original${logo_movie_name}`;
+            var logo  = await `<img style="width:200px;" src=${logo_pic}>`
+                }
+                catch(e){
+                logo = data_main.title;
+                }
+              }
+    var  main_data  = await `<div class="swiper-slide">
+      <div class="swipe" style="z-index:20px;background:linear-gradient(to bottom,transparent,transparent);">${logo}</div>
+<img class="shade clicking_here" data-name="${data.imdbID}" data-year="${data.Year}" data-genre="${data.Genre}" data-run="${data.Runtime}S" data-dir="${data.Director}" data-rated="${data.Rated}" data-awards="${data.Awards}"  data-votes="${data.imdbVotes}" src="${photo}"></div>`;
+    swiper_wrapper.insertAdjacentHTML('afterbegin',main_data);
+  
+
+  }) 
+  
+
+ };
+ must()  
+ const swiper_wrapper  = document.querySelector('.shit');
+  const swiper_handler = setInterval(() => {
+    if(swiper_wrapper.childElementCount == (mustwatch.length + 1)){
+  var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 5,
+        loop: true,
+        
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+        },
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+      const must_watch_click = document.querySelectorAll('.shade');
+      const logo_click  = document.querySelectorAll('.logo_click');
+      logo_click.forEach(mustwatch => {
+        mustwatch.addEventListener('click',handle)
+      })
+      must_watch_click.forEach(mustwatch => {
+        mustwatch.addEventListener('click',handle)
+      })
+      clearInterval(swiper_handler)
+}
+  },200)
+ 
+
+ 
+  const div = document.querySelector('.info');
+  const comedy = document.querySelector('.comedy');
+  const land = document.querySelector('.land');
+  const after = document.querySelector('.after')
+   const Thriller = ['Oldboy','I saw the Devil ','Memories of Murder',' THE Chaser ','The Wailing','The Witch: Part 1 - The Subversion','The Mist','Train to Busan'];
+   Thriller.push('American Psycho','Psycho',`Don't Breathe`,'Jaws','Shutter Island');
+   Thriller.push('Strangers on a Train','Inception ','Incendies','The Dark Knight')
+
+   Thriller.push('Memento','The Departed','The Prestige','Parasite')
+   const comedyM = ['Accepted','American Pie','This is the end','Pineapple Express','Project X','Superbad ','The Hangover','Wedding Crashers','The Croods'];
+   comedyM.push('Eurotrip','Ted',`can't hardly wait`,'Zack and Miri Make a Porno','The Edge of Seventeen','The Perks of Being a Wallflower','American Reunion','The Inbetweeners 2','The Croods: A New Age');
+ function h(myMovies,div){
+    myMovies.map(async m => {
+  const API_KEY = `680db35a08bf7184a8a2c16cd0d7308e`;
+  const end = `http://www.omdbapi.com?t=${m}&apikey=de727baf`;
+  const data  = await fetch(end).then(data => data.json()).then(data => data);
+  const data_for_pic  = await data.imdbID;
+  const end_movie_db  =   await `https://api.themoviedb.org/3/movie/${data_for_pic}?api_key=${API_KEY}`;
+  const data_movie_db =  await fetch(end_movie_db).then(data => data.json()).then(data => data);
+  
+  const picture_url   =  await data_movie_db.poster_path;
+  const picture   =  `https://image.tmdb.org/t/p/w220_and_h330_face${picture_url}`
+  const d = await `<div class="item">
+            <img  loading="lazy" onclick="handle(event,this)" class="img clicking_here" data-name="${data.imdbID}" data-year="${data.Year}" data-genre="${data.Genre}" data-run="${data.Runtime}S" data-dir="${data.Director}" data-rated="${data.Rated}" data-awards="${data.Awards}"  data-votes="${data.imdbVotes}" alt="${data.Title}" src="${data.Poster}">
+            <div class="title">
+              <div style="margin-top:3.33px;">${data.Title}</div>
+              <span data-name="${data.imdbID}" data-year="${data.Year}" data-genre="${data.Genre}" data-run="${data.Runtime}S" data-dir="${data.Director}" data-rated="${data.Rated}" data-awards="${data.Awards}"  data-votes="${data.imdbVotes}" style="margin-top:1.7px;color:white;font-weight:bold;min-width:29px;display:flex;"><div style="padding-top:0.3px;">🔥</div><div style="margin-top:1.5px;">${data.imdbRating}</div></span>
+              </div>
+            </div>`
+  div.insertAdjacentHTML('afterbegin',d);
+})
+ }
+h(Thriller,div)
+h(comedyM,comedy)
+  const pre = document.querySelector('.preLoad');
+  setTimeout(() => {
+    pre.children[0].style.visibility='visible';
+
+  }, 900);
+  setTimeout(() => {
+    pre.children[1].style.visibility= 'visible';
+  }, 1800);
+  setTimeout(() => {
+   
+    pre.children[2].style.visibility= 'visible';
+    
+  }, 2700);
+  setTimeout(() => {
+    pre.style.display ='none';
+  }, 3000);
+
+  $(document).ready(function(){
+    $('.land').hide().delay(3400).fadeIn('slow');
+  });
+
+  
+ function handle(e,thiss){
+  const movieRemove = document.querySelector('.movieInfoData');
+movieRemove.innerHTML = ''
+          let  adult = document.querySelector('.adult')
+          const movieName = e.target.dataset.name;
+          const year = e.target.dataset.year;
+          const genre = e.target.dataset.genre;
+          const dir = e.target.dataset.dir;
+          const Runtime = e.target.dataset.run;
+          const Rated = e.target.dataset.rated;
+          const AWARDS = e.target.dataset.awards;
+          const imdb_votes  = e.target.dataset.votes;
+          if(Rated == 'R')
+          {
+            adult.innerHTML  = '<span class="adult_rate">18+</span>'
+          }
+          else if(Rated == 'Not'){
+            
+            adult.innerHTML = '';
+          }
+          else if(Rated == 'G'){
+            adult.innerHTML = '<span class="adult_rate">PG-13</span>'
+          }
+          else{
+             adult.innerHTML = `<span class="adult_rate">${Rated.toUpperCase()}</span>`;
+             
+          }
+           function display(movieName,year,Runtime,genre,dir,adult){
+            async function data(movieName,year,Runtime,genre,dir,adult){
+                let moviedata = document.querySelector('.movieInfoData');
+                const API_KEY = `680db35a08bf7184a8a2c16cd0d7308e`;
+                const end = `https://api.themoviedb.org/3/movie/${movieName}?api_key=${API_KEY}&language=en-US&append_to_response=images&include_image_language=en,null`;
+                const en = `https://api.themoviedb.org/3/movie/${movieName}/watch/providers?api_key=${API_KEY}`;
+               const data_main = await fetch(end).then(data => data.json()).then(data =>  data)
+              const photo = `https://image.tmdb.org/t/p/original${data_main.backdrop_path}`;
+              const watch_prov = await fetch(en).then(data => data.json()).then(data =>  data)
+              let ott;
+              let linkk;
+              console.log(data_main)
+              try{
+            const logo_movie_name = data_main.images.logos[0].file_path;
+            var logo_pic  = `https://image.tmdb.org/t/p/w185${logo_movie_name}`;
+            var logo  = await `<img src=${logo_pic}>`
+              }
+              catch{
+                logo = data_main.title;
+
+              }
+             try
+              {
+                ott = `WATCH ON `+(watch_prov.results.IN.flatrate[0].provider_name || watch_prov.results.IN.ads[0].provider_name);
+                linkk = `<a  style="text-decoration:none;color:black;" href="${watch_prov.results.IN.link}" target="_blank">${ott}</a>`
+              }
+              catch(e){
+                 ott = 'NOT AVAILABLE TO STREAM';
+                 linkk = `${ott}`
+              }
+              const m_data =   await `<div class="m-item" data-name="${data_main.id}">
+                 <div class="i trans"  >
+                  
+                  <div style="margin-top:3.33px;z-index:20px;">${logo}</div>
+                 <span class="year go_back">${year} • ${Runtime} </span>
+                 <div class="year" id="tag"><span class="qoute">&#10075</span>${data_main.tagline || data_main.overview.split('.')[0]}<span class='qoute'>&#10076</span></div>
+                 <div class="genre year" ><span style="color:white;">Genre : </span>${genre}</div>
+                 <div class="genre year" ><span style="color:white;">DIRECTED BY : </span>${dir}</div>
+                 <div class="genre year" ><span style="color:white;">IMDB VOTES : 🔥</span>${imdb_votes}</div>
+                 <div class="genre year" ><span style="color:white;">AWARDS : </span>${AWARDS}</div>
+                 <div class="play_btn play_trailer"><div class='play_text' style="display:flex;font-weight:900;">
+                  <span class="play_btn_abs" style="margin-right:10px;"><img style="width:18px;margin-top:2px;"src="https://img.icons8.com/ios-glyphs/30/000000/play--v1.png"/></span><span style="font-style:bold;">PLAY TRAILER</span></div></div>
+                 <div class="play_btn "><div class='play_text'>${linkk}</div></div>
+                 <div class="play_btn play_movie"><div class='play_text'>Watch Moive</div></div>
+
+               </div>
+               <img   class="imga img_hide" alt="${data_main.title}" src="${photo}"><div class="abso">  
+              
+            </div></div>`;
+            const trailer_interval  =   setInterval(handle_trailer,600);
+            
+function handle_trailer(movieName){
+  var imdbID_name = e.target.dataset.name;
+
+      if(m_data){
+      const play_movie  = document.querySelector('.play_movie');
+      const movieRemove = document.querySelector('.movieInfoData');
+      play_movie.addEventListener('click', () => {
+        
+        movieRemove.innerHTML = `<iframe  style="margin-top:50%;" id="ve-iframe" src="https://2embed.org/embed/${imdbID_name}" width="100%" height="400px" allowfullscreen frameborder="0"></iframe>`
+        
+
+      })
+      const play_trailer = document.querySelector('.play_trailer'); 
+      play_trailer.addEventListener('click',  async function handleTrailerBtn(e,movieName){
+        play_trailer.removeEventListener('click',handleTrailerBtn);
+        const trailer_end =  `https://api.themoviedb.org/3/movie/${imdbID_name}/videos?api_key=${API_KEY}&language=en-US`;
+        var trailer_key = [];
+        const trailer = await fetch(trailer_end).then(data => data.json()).then(data => data)
+        trailer.results.map(trailer => {
+             trailer_key.push(trailer.key);
+        })
+        const youtube_key  = trailer_key[0];
+        const youtube_url  = `https://www.youtube.com/embed/${youtube_key}`;
+        const youtube_trailer  =  `<iframe  class="youtube" border="0" width="99.8%" height="280px" src="${youtube_url}" frameborder="0" allowfullscreen></iframe>`;
+        const img_hide  = document.querySelector('.m-item').children[1];
+        const adult_hide  =  document.querySelector('.adult_hide');
+        const btn_hide = document.querySelector('.btn_hide');
+        const trans_zindex = document.querySelector('.i');
+        const go_back = document.createElement('span');
+
+      go_back.classList.add('go_back_btn')
+         go_back.innerText = 'BACK';
+         document.querySelector('.go_back').insertAdjacentElement('beforeend',go_back)
+        btn_hide.style.display = 'none';
+        img_hide.style.display = 'none';
+        adult_hide.style.display = 'none';
+        btn_hide.style.display.marginRight = '-8px';
+        trans_zindex.style.marginTop = '0px';
+        const embed_trailer  = document.querySelector('.trans');
+
+        go_back.addEventListener('click', function (){
+          movieInfoPage.style.display = 'none';
+                page.style.display = 'block';
+                const movieRemove = document.querySelector('.movieInfoData');
+               if(movieRemove.firstChild) {
+                const removiemovie = movieRemove.firstChild;
+                 movieRemove.removeChild(removiemovie);
+               }
+                 adult_hide.style.display = 'block';
+                btn_hide.style.display = 'block';
+
+        })
+        embed_trailer.insertAdjacentHTML('afterbegin',youtube_trailer)
+        
+
+  }) 
+    
+    }
+  clearInterval(trailer_interval);
+
+}
+const movieRemove = document.querySelector('.movieInfoData');
+              movieRemove.innerHTML = '';
+
+              moviedata.insertAdjacentHTML('afterbegin',m_data);
+              }
+              data(movieName,year,Runtime,genre,dir,adult);
+
+              const movieInfoPage = document.querySelector('.iinfo');
+              const page = document.querySelector('.loading'); 
+              page.style.display = 'none';
+              movieInfoPage.style.display = 'block';
+              const back_btn = document.querySelector('.back_btn');              
+              back_btn.addEventListener('click',function handlerBtn(e){
+                
+                const btn_hide = document.querySelector('.btn_hide')
+                const adult_hide  =  document.querySelector('.adult_hide');
+                adult_hide.style.display = 'block';
+                btn_hide.style.display = 'block';
+                if(document.querySelector('.go_back')){
+                const go_back = document.querySelector('.go_back');
+               go_back.style.display = 'none';
+                }
+                const movieRemove = document.querySelector('.movieInfoData');
+                movieInfoPage.style.display = 'none';
+                page.style.display = 'block';
+                movieRemove.innerHTML = '';
+              })
+            }
+            display(movieName,year,Runtime,genre,dir,adult)
+        }
+ </script>
+
+
+</body>
+</html>
+
+
+
